@@ -5,6 +5,7 @@ import com.driver.model.Airport;
 import com.driver.model.City;
 import com.driver.model.Flight;
 import com.driver.model.Passenger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -16,12 +17,15 @@ import java.util.Objects;
 
 @RestController
 public class AirportController {
+
+
+    AirportService airportService = new AirportService() ;
     @PostMapping("/add_airport")
     public String addAirport(@RequestBody Airport airport){
 
-        //Simply add airport details to your database
-        //Return a String message "SUCCESS"
 
+
+        airportService.addAirport(airport);
         return "SUCCESS";
     }
 
@@ -31,11 +35,16 @@ public class AirportController {
         //Largest airport is in terms of terminals. 3 terminal airport is larger than 2 terminal airport
         //Incase of a tie return the Lexicographically smallest airportName
 
-       return null;
+        String largestAirportName = airportService.getLargestAirportName();
+
+        return largestAirportName;
     }
 
     @GetMapping("/get-shortest-time-travel-between-cities")
     public double getShortestDurationOfPossibleBetweenTwoCities(@RequestParam("fromCity") City fromCity, @RequestParam("toCity")City toCity){
+
+
+       double a =  airportService.getShortest(fromCity, toCity) ;
 
         //Find the duration by finding the shortest flight that connects these 2 cities directly
         //If there is no direct flight between 2 cities return -1.
@@ -98,8 +107,10 @@ public class AirportController {
     @PostMapping("/add-flight")
     public String addFlight(@RequestBody Flight flight){
 
+        airportService.addFlight(flight);
+
         //Return a "SUCCESS" message string after adding a flight.
-       return null;
+       return "SUCCESS";
     }
 
 
