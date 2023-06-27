@@ -3,6 +3,7 @@ package com.driver.controllers;
 import com.driver.model.Airport;
 import com.driver.model.City;
 import com.driver.model.Flight;
+import com.driver.model.Passenger;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,8 @@ public class AirportService {
         airportRepository.addAirport(airport);
     }
     public String getLargestAirportName(){
-        return airportRepository.getLargestAirportName;
+        String ans = airportRepository.getLargestAirportName;
+    return ans;
     }
 
     public double getShortest(City from , City to ){
@@ -26,5 +28,9 @@ public class AirportService {
 
     public void addFlight(Flight flight) {
         airportRepository.addFlight(flight);
+    }
+
+    public void addPassenger(Passenger passenger) {
+        airportRepository.addPassenger(passenger);
     }
 }

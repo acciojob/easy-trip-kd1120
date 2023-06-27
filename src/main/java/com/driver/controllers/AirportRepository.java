@@ -4,6 +4,7 @@ import com.driver.model.Airport;
 
 import com.driver.model.City;
 import com.driver.model.Flight;
+import com.driver.model.Passenger;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
@@ -15,10 +16,13 @@ import java.util.Set;
 @Repository
 public class AirportRepository {
 
+
     public String getLargestAirportName;
     HashSet<Airport> airports = new HashSet<>();
     HashMap<String, Integer> airTermi = new HashMap<>();
     HashSet<Flight> flightHashSet = new HashSet<>();
+
+    HashSet<Passenger> passengerHashSet = new HashSet<>();
 
 
 
@@ -31,6 +35,8 @@ public class AirportRepository {
         }
 
     }
+
+
     public String getLargestAirportName(){
        // Airport max  = new Airport();
        // if(airport.getNoOfTerminals()>)
@@ -93,5 +99,11 @@ public class AirportRepository {
  if(!flightHashSet.contains(flight)){
      flightHashSet.add(flight);
  }
+    }
+
+    public void addPassenger(Passenger passenger) {
+        if(!passengerHashSet.contains(passenger)){
+            passengerHashSet.add(passenger);
+        }
     }
 }
