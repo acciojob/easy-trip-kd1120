@@ -6,6 +6,8 @@ import com.driver.model.Flight;
 import com.driver.model.Passenger;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class AirportService {
 
@@ -23,8 +25,16 @@ public class AirportService {
 
 
     public double getShortest(City from , City to ){
-        airportRepository.getShortest(from, to);
-        return 0;
+      return   airportRepository.getShortest(from, to);
+
+    }
+
+    public String bookATicket(Integer flightId, Integer passengerId){
+        return airportRepository.bookATicket(flightId, passengerId);
+    }
+
+    public int calculateFare(int flightId){
+        return airportRepository.calculateFare(flightId);
     }
 
     public void addFlight(Flight flight) {
@@ -33,5 +43,9 @@ public class AirportService {
 
     public void addPassenger(Passenger passenger) {
         airportRepository.addPassenger(passenger);
+    }
+
+    public int getNumberOfPeople(Date date, String airportName) {
+        return airportRepository.getNumberOfPeople(date, airportName);
     }
 }
