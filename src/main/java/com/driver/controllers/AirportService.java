@@ -4,40 +4,21 @@ import com.driver.model.Airport;
 import com.driver.model.City;
 import com.driver.model.Flight;
 import com.driver.model.Passenger;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Service
 public class AirportService {
+    AirportRepository airportRepository= new AirportRepository();
 
-
-    //public String getLargestAirportName;
-    AirportRepository airportRepository  = new AirportRepository();
-
-    public void addAirport(Airport airport){
-
+    public void addAirport(Airport airport) {
         airportRepository.addAirport(airport);
     }
+
     public String getLargestAirportName() {
         return airportRepository.getLargestAirportName();
     }
 
-
-    public double getShortest(City from , City to ){
-      return   airportRepository.getShortest(from, to);
-
-    }
-
-    public String bookATicket(Integer flightId, Integer passengerId){
-        return airportRepository.bookATicket(flightId, passengerId);
-    }
-
-    public int calculateFare(int flightId){
-        return airportRepository.calculateFare(flightId);
-    }
-
-    public void addFlight(Flight flight) {
+    public void aaddFlight(Flight flight) {
         airportRepository.addFlight(flight);
     }
 
@@ -45,24 +26,35 @@ public class AirportService {
         airportRepository.addPassenger(passenger);
     }
 
-    public int getNumberOfPeople(Date date, String airportName) {
-        return airportRepository.getNumberOfPeople(date, airportName);
-    }
-
-    public int calculateRevenue(Integer flightId) {
-        return airportRepository.calculateRevenue(flightId);
-    }
-
-    public String getAirportName(Integer flightId) {
-        return airportRepository.getLargestAirportName(flightId);
+    public String bookATicket(Integer flightId, Integer passengerId) {
+        return  airportRepository.bookATicket(flightId,passengerId);
     }
 
     public String cancelATicket(Integer flightId, Integer passengerId) {
         return airportRepository.cancelATicket(flightId,passengerId);
     }
 
-    public int countOfBooking(Integer passengerId) {
+    public int countOfBookingsDoneByPassengerAllCombined(Integer passengerId) {
+        return airportRepository.countOfBookingsDoneByPassengerAllCombined(passengerId);
+    }
 
-        return airportRepository.countOfBooking(passengerId);
+    public int calculateFare(Integer flightId) {
+        return airportRepository.calculateFare(flightId);
+    }
+
+    public double getShortestTime(City fromCity, City toCity) {
+        return airportRepository.getShortestTime(fromCity,toCity);
+    }
+
+    public int calculateRevenueOfAFlight(Integer flightId) {
+        return airportRepository.calculateRevenueOfAFlight(flightId);
+    }
+
+    public String getAirportName(Integer flightId) {
+        return airportRepository.getAirportNmae(flightId);
+    }
+
+    public int getNumberOfPeople(Date date, String airportName) {
+        return airportRepository.getNumberOfPeople(date, airportName);
     }
 }
