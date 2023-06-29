@@ -23,8 +23,6 @@ public class AirportController {
     @PostMapping("/add_airport")
     public String addAirport(@RequestBody Airport airport){
 
-
-
         airportService.addAirport(airport);
         return "SUCCESS";
     }
@@ -35,9 +33,9 @@ public class AirportController {
         //Largest airport is in terms of terminals. 3 terminal airport is larger than 2 terminal airport
         //Incase of a tie return the Lexicographically smallest airportName
 
-        String largestAirportName = airportService.getLargestAirportName();
+        return  airportService.getLargestAirportName();
 
-        return largestAirportName;
+
     }
 
     @GetMapping("/get-shortest-time-travel-between-cities")

@@ -7,87 +7,53 @@ import com.driver.model.Flight;
 import com.driver.model.Passenger;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 
 @Repository
 public class AirportRepository {
 
 
-    public String getLargestAirportName;
-    HashSet<Airport> airports = new HashSet<>();
-    HashMap<String, Integer> airTermi = new HashMap<>();
-    HashSet<Flight> flightHashSet = new HashSet<>();
-
-    HashSet<Passenger> passengerHashSet = new HashSet<>();
-
+//    public String getLargestAirportName;
+//    HashSet<Airport> airports = new HashSet<>();
+//    HashMap<String, Integer> airTermi = new HashMap<>();
+//    HashSet<Flight> flightHashSet = new HashSet<>();
+//
+//    HashSet<Passenger> passengerHashSet = new HashSet<>();
+//
+private TreeMap<String,Airport> airportMap= new TreeMap<>();
+    private HashMap<Integer,Flight> flightMap= new HashMap<>();
+    private HashMap<Integer,Passenger> passengerMap= new HashMap<>();
+    private HashMap<Integer,Set<Integer>> flightPassMap= new HashMap<>();
+    private HashMap<Integer,Integer> revenueMap= new HashMap<>();
+    private HashMap<Integer,Integer> paymentMap= new HashMap<>();
 
 
     public void addAirport(Airport airport){
-        if(!airports.contains(airport)){
+        if(!airportMap.containsKey(airport.getAirportName())){
             //return "Already exist";
 
-            airports.add(airport);
-            airTermi.put(airport.getAirportName(),airport.getNoOfTerminals());
+            airportMap.put(airport.getAirportName(),airport);
+            //airTermi.put(airport.getAirportName(),airport.getNoOfTerminals());
         }
 
     }
 
-
     public String getLargestAirportName(){
-       // Airport max  = new Airport();
-       // if(airport.getNoOfTerminals()>)
 
- //int m =0;
-//        for(Airport airport: airports){
-//            if(airport.getNoOfTerminals()>m){
-//                m = airport.getNoOfTerminals();
-//
-//            }
-//            m  = Math.max(m, airport.getNoOfTerminals());
-//
-//        }
+        String result = "";
+        int ans =0;
+        for(String name:airportMap.keySet()){
+            int ter = airportMap.get(name).getNoOfTerminals();
 
-//        for(Map.Entry<String,Integer> entry: airTermi.entrySet()){
-//            if(entry.getValue()>m){
-//                m  = entry.getValue();
-//
-//            }
-//
-//            m = Math.max(m,entry.getValue() );
-//        }
-//        String key="";
-//        for (Map.Entry<String, Integer> entry : airTermi.entrySet()) {
-//            if (entry.getValue() == m) {
-//                key = entry.getKey();
-//                break;
-//            }
-//        }
-//        return key;
-
-                String largestAirportName = null;
-                int maxTerminals = Integer.MIN_VALUE;
-
-                for (Map.Entry<String, Integer> entry : airTermi.entrySet()) {
-                    String airportName = entry.getKey();
-                    int numTerminals = entry.getValue();
-
-                    if (numTerminals > maxTerminals) {
-                        largestAirportName = airportName;
-                        maxTerminals = numTerminals;
-//                    } else if (numTerminals == maxTerminals && airportName.compareTo(largestAirportName) < 0) {
-//                        // If there's a tie, update largestAirportName to the lexicographically smaller airport name
-//                        largestAirportName = airportName;
-//                    }
-                    }
-
+            if(ter>ans){
+                ans = ter;
+                result = name;
+            }
+        }
+        return result;
 
                 }
-        return largestAirportName;
-    }
 
     public void getShortest(City from, City to) {
 
@@ -96,14 +62,14 @@ public class AirportRepository {
     }
 
     public void addFlight(Flight flight) {
- if(!flightHashSet.contains(flight)){
-     flightHashSet.add(flight);
+ if(!flightMap.containsKey(flight.getFlightId())){
+     flightMap.put(flight.getFlightId(),flight);
  }
     }
 
     public void addPassenger(Passenger passenger) {
-        if(!passengerHashSet.contains(passenger)){
-            passengerHashSet.add(passenger);
+        if(!passengerMap.containsKey(passenger.getPassengerId())){
+            passengerMap.put(passenger.getPassengerId(), passenger);
         }
     }
 }
