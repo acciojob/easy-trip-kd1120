@@ -48,4 +48,21 @@ public class AirportService {
     public int getNumberOfPeople(Date date, String airportName) {
         return airportRepository.getNumberOfPeople(date, airportName);
     }
+
+    public int calculateRevenue(Integer flightId) {
+        return airportRepository.calculateRevenue(flightId);
+    }
+
+    public String getAirportName(Integer flightId) {
+        return airportRepository.getLargestAirportName(flightId);
+    }
+
+    public String cancelATicket(Integer flightId, Integer passengerId) {
+        return airportRepository.cancelATicket(flightId,passengerId);
+    }
+
+    public int countOfBooking(Integer passengerId) {
+
+        return airportRepository.countOfBooking(passengerId);
+    }
 }

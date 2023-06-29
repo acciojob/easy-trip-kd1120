@@ -130,4 +130,56 @@ private TreeMap<String,Airport> airportMap= new TreeMap<>();
         }
         return c;
     }
+
+    public int calculateRevenue(Integer flightId) {
+       Integer revenue = revenueMap.getOrDefault(flightId,0);
+
+
+        return revenue;
+    }
+
+    public String getLargestAirportName(Integer flightId) {
+
+        if(!flightMap.containsKey(flightId)){
+            return null;
+        }
+        Flight flight = flightMap.get(flightId);
+        City city = flight.getFromCity();
+        for(String airportname : airportMap.keySet()){
+            Airport airport = airportMap.get(airportname);
+            if(city.equals(airport.getCity())){
+                return  airportname;
+            }
+        }
+        return null;
+
+    }
+
+    public String cancelATicket(Integer flightId, Integer passengerId) {
+        Set<Integer> list = flightPassMap.get(flightId);
+        if(list.contains(passengerId)){
+            list.remove(passengerId);
+            int fare = paymentMap.getOrDefault(passengerId,0);
+            paymentMap.remove(passengerId);
+            int revenue =   revenueMap.getOrDefault(flightId,0);
+            revenueMap.put(flightId,revenue-fare);
+            return "SUCCESS";
+        }
+        return "FAILURE";
+
+    }
+
+    public int countOfBooking(Integer passengerId) {
+        int c =0;
+        for(Integer flightId: flightPassMap.keySet()){
+            Set<Integer> list = flightPassMap.get(flightId);
+            if(list.contains(passengerId)){
+                c++;
+            }
+
+        }
+
+
+        return c;
+    }
 }
